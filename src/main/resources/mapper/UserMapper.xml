@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.caicai.demo.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.caicai.demo.entity.UserEntity">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="selectUserSql">
+        select id,
+               name,
+               age
+        from tb_user
+    </sql>
+
+    <select id="selectUsers" resultMap="userResultMap">
+        <include refid="selectUserSql"/>
+    </select>
+
+    <delete id="deleteUser">
+        delete from tb_user where id = #{id}
+    </delete>
+</mapper>
